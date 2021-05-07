@@ -87,6 +87,24 @@ header{
     width:32px;
     height:26px;
 }
+#pen{
+    width:22px;
+    height:22px;
+    border: none;
+    border-radius:5px;
+    background-color: rgb(10, 6, 255);
+    border: 1px solid gray;
+
+}
+#eraser{
+    width:22px;
+    height:22px;
+    border: none;
+    border-radius:5px;
+    background-color: rgb(255, 197, 6);
+    border: 1px solid gray;
+
+}
 #delete{
     width:22px;
     height:22px;
@@ -110,6 +128,6 @@ header{
 }
 #canvas{
     border: 2px solid black;
-   cursor: url(./img/pencil.svg) 2 20,auto;
+   
   
 }

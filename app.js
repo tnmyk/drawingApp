@@ -35,6 +35,23 @@ window.addEventListener("load", () => {
     reset();
     ctx.fillStyle = "white";
   });
+  canvas.style.cursor = "url(/img/pencil.svg)0 25,auto";
+  var penchoosen =true;
+  document.querySelector('#pen').addEventListener('click',()=>{
+    if(penchoosen) return;  
+    canvas.style.cursor = "url(/img/pencil.svg)0 20,auto";
+    ctx.strokeStyle = color.value;
+      linewidth -= 10;
+      penchoosen=true;
+  });
+  document.querySelector("#eraser").addEventListener("click", () => {
+    if(!penchoosen) return;
+    canvas.style.cursor = "url(./img/eraser.svg)0 15,auto";
+    linewidth+=10;
+    ctx.strokeStyle = document.querySelector("#bcolor").value;
+    penchoosen=false;
+  });
+
 
   var color = document.querySelector("#color");
   color.addEventListener("change", () => {
