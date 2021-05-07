@@ -45,6 +45,8 @@ window.addEventListener("load", () => {
   var penchoosen = true;
   document.querySelector("#pen").addEventListener("click", () => {
     if (penchoosen) return;
+    document.querySelector("#eraser").style.border = "none";
+    document.querySelector("#pen").style.border = "2px solid white";
     canvas.style.cursor = "url(/img/pencil.svg)0 20,auto";
     color = prevcolor;
     ctx.strokeStyle = color;
@@ -53,6 +55,9 @@ window.addEventListener("load", () => {
   });
   document.querySelector("#eraser").addEventListener("click", () => {
     if (!penchoosen) return;
+    document.querySelector("#eraser").style.border="2px solid white"
+    document.querySelector("#pen").style.border = "none";
+
     canvas.style.cursor = "url(./img/eraser.svg)0 15,auto";
     linewidth += 10;
     prevcolor = color;
@@ -62,7 +67,9 @@ window.addEventListener("load", () => {
   });
 
   var colormenu = document.querySelector("#color-menu");
+  var sizemenu = document.querySelector("#size-menu");
   var setcolor = document.querySelector("#setcolor");
+  var setsize = document.querySelector("#setsize");
   var toopen = 0;
   setcolor.addEventListener("click", () => {
     colormenu.style.right = "0vh";
@@ -129,7 +136,51 @@ window.addEventListener("load", () => {
       colormenu.style.right = "0vh";
       toopen = 2;
     });
+  setsize.addEventListener('click',()=>{
+      sizemenu.style.right = "0vh";
+  })
+  sizemenu.addEventListener('click',(e)=>{
+    var target = e.target;
+        
+    var sizes = document.querySelectorAll(".sizes");
+    for(var i=0;i<sizes.length;++i){
+      sizes[i].style.border="none";
+    }
+    switch (target.id) {
+      case "zero":
+        linewidth = 7;
+        document.querySelector("#zero").style.border="2px solid white"
+        break;
+      case "one":
+        linewidth = 10.5;
+        document.querySelector("#one").style.border = "2px solid white";
+        break;
+      case "two":
+        linewidth = 14;
+        document.querySelector("#two").style.border = "2px solid white";
+        break;
+      case "three":
+        linewidth = 33;
+        document.querySelector("#three").style.border = "2px solid white";
+        break;
+      case "four":
+        linewidth = 44;
+        document.querySelector("#four").style.border = "2px solid white";
+        break;
+      case "five":
+        linewidth = 54;
+        document.querySelector("#five").style.border = "2px solid white";
+        break;
+      case "six":
+        linewidth = 68;
+        document.querySelector("#six").style.border = "2px solid white";
+        break;
+      default:
+        break;
+    }
+      sizemenu.style.right = "-30vh";
 
+  })
   document.querySelector("#delete").addEventListener("click", () => {
     reset();
   });
