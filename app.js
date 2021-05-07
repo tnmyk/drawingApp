@@ -1,12 +1,13 @@
 window.addEventListener("load", () => {
   var linewidth = 7;
-  var color="black"
-  var backgroundcolor ="white"
+  var color = "black";
+  var prevcolor = color;
+  var backgroundcolor = "white";
   const canvas = document.querySelector("#canvas");
   const ctx = canvas.getContext("2d", { alpha: false });
   canvas.width = window.innerWidth - 4;
   canvas.height = window.innerHeight - 65.6;
- 
+  ctx.strokeStyle = color;
   ctx.fillStyle = backgroundcolor;
   ctx.fillRect(0, 0, canvas.width, canvas.height);
   ctx.translate(-1, -58);
@@ -20,8 +21,8 @@ window.addEventListener("load", () => {
     ctx.beginPath();
   }
   function draw(e) {
-     ctx.strokeStyle = color;
     if (!painting) return;
+    ctx.strokeStyle = color;
     ctx.lineWidth = linewidth;
     ctx.lineCap = "round";
     ctx.lineJoin = "round";
@@ -36,39 +37,40 @@ window.addEventListener("load", () => {
 
   window.addEventListener("resize", () => {
     ctx.fillStyle = backgroundcolor;
-    ctx.strokeStyle =color;
+    ctx.strokeStyle = color;
     reset();
   });
-  var prevcolor=color;
+
   canvas.style.cursor = "url(/img/pencil.svg)0 25,auto";
-  var penchoosen =true;
-  document.querySelector('#pen').addEventListener('click',()=>{
-    if(penchoosen) return;  
+  var penchoosen = true;
+  document.querySelector("#pen").addEventListener("click", () => {
+    if (penchoosen) return;
     canvas.style.cursor = "url(/img/pencil.svg)0 20,auto";
-    color=prevcolor;
+    color = prevcolor;
     ctx.strokeStyle = color;
-      linewidth -= 10;
-      penchoosen=true;
+    linewidth -= 10;
+    penchoosen = true;
   });
   document.querySelector("#eraser").addEventListener("click", () => {
-    if(!penchoosen) return;
+    if (!penchoosen) return;
     canvas.style.cursor = "url(./img/eraser.svg)0 15,auto";
-    linewidth+=10;
-    prevcolor=color;
+    linewidth += 10;
+    prevcolor = color;
+    console.log(backgroundcolor);
     color = backgroundcolor;
-    penchoosen=false;
+    penchoosen = false;
   });
 
-  var colormenu=document.querySelector('#color-menu');
+  var colormenu = document.querySelector("#color-menu");
   var setcolor = document.querySelector("#setcolor");
-  var toopen=0;
+  var toopen = 0;
   setcolor.addEventListener("click", () => {
     colormenu.style.right = "0vh";
-    toopen=1
+    toopen = 1;
   });
-  colormenu.addEventListener("click",(e)=>{
+  colormenu.addEventListener("click", (e) => {
     var target = e.target;
-    if(toopen==1){
+    if (toopen == 1) {
       switch (target.id) {
         case "black":
           color = "black";
@@ -88,9 +90,12 @@ window.addEventListener("load", () => {
         default:
           break;
       }
-      setcolor.style.backgroundColor=color;
-    }
-    else if(toopen==2){
+      if (!penchoosen) {
+        canvas.style.cursor = "url(/img/pencil.svg)0 20,auto";
+        penchoosen=true;
+      }
+      setcolor.style.backgroundColor = color;
+    } else if (toopen == 2) {
       switch (target.id) {
         case "black":
           backgroundcolor = "black";
@@ -110,18 +115,20 @@ window.addEventListener("load", () => {
         default:
           break;
       }
-      ctx.fillStyle =backgroundcolor;
+      ctx.fillStyle = backgroundcolor;
       reset();
-      if(!penchoosen) color=backgroundcolor;
+      // if (!penchoosen) color = backgroundcolor;
       setbackgroundcolor.style.backgroundColor = backgroundcolor;
     }
-    colormenu.style.right="-30vh";
-  })
-  document.querySelector("#setbackgroundcolor").addEventListener("click", () => {
-    colormenu.style.right = "0vh";
-    toopen=2;
-    
+    colormenu.style.right = "-30vh";
   });
+
+  document
+    .querySelector("#setbackgroundcolor")
+    .addEventListener("click", () => {
+      colormenu.style.right = "0vh";
+      toopen = 2;
+    });
 
   document.querySelector("#delete").addEventListener("click", () => {
     reset();
