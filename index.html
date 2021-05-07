@@ -18,29 +18,35 @@
     </header>
     <div class="tools">
         
-        <div> Pen <br>
+        <div class="menu"> Pen <br>
             <button id="pen">P</button>
         </div>
-        <div> Eraser <br>
+        <div class="menu"> Eraser <br>
             <button id="eraser">E</button>
         </div>
-        <div> Pen Color
-            <input type="color" name="color" id="color">
+        <div class="menu"> Pen Color
+            <div id="setcolor"></div>
         </div>
-        <div> Board Color
+        <div class="menu"> Board Color
             <input type="color" value="#FFFFFF" name="bcolor" id="bcolor">
         </div>
-        <div> Save Image  <br>
+        <div class="menu"> Save Image  <br>
             <a id="download"><button id="save">S</button></a>
         </div>
-        <div> Pen size in %<br>
+        <div class="menu"> Pen size in %
             <input type="text" name="size" id="size">
         </div>
-        <div> Delete Board  <br>
+        <div class="menu"> Delete Board 
             <button id="delete">X</button>
         </div>
-        
     </div>
+      <div id="color-menu">
+          <div class="colors" id="black" style="background-color: black;"></div>
+          <div class="colors" id="white" style="background-color: white;"></div>
+          <div class="colors" id="red" style="background-color: red;"></div>
+          <div class="colors" id="green" style="background-color: greenyellow;"></div>
+          <div class="colors" id="blue" style="background-color: blue;"></div>
+      </div>  
      <canvas id='canvas'></canvas>
 </body>
 </html>
