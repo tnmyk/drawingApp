@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Draw App</title>
+    <link rel="stylesheet" href="./style.css">
+    <script defer src="./app.js"></script>
+</head>
+<body>
+    <header>
+        <div class="logo-container">
+            
+            <a href="#"><img src="./img/logo.svg" alt=""> Drawww App</a>
+        </div>
+        <a href="#" class="about-link">About</a>
+    </header>
+    <div class="tools">
+        <div> Pen Color
+            <input type="color" name="color" id="color">
+        </div>
+        <div> Board Color
+            <input type="color" value="#FFFFFF" name="bcolor" id="bcolor">
+        </div>
+        <div> Save Image  <br>
+            <a id="download"><button id="save">S</button></a>
+        </div>
+        <div> Pen size in %<br>
+            <input type="text" name="size" id="size">
+        </div>
+        <div> Delete Board  <br>
+            <button id="delete">X</button>
+        </div>
+        
+    </div>
+     <canvas id='canvas'></canvas>
+</body>
+</html>
