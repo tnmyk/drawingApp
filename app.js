@@ -35,15 +35,17 @@ window.addEventListener("load", () => {
   canvas.addEventListener("mousemove", draw);
 
   window.addEventListener("resize", () => {
+    ctx.fillStyle = backgroundcolor;
+    ctx.strokeStyle =color;
     reset();
-    ctx.fillStyle = "white";
-    backgroundcolor = "white"
   });
+  var prevcolor=color;
   canvas.style.cursor = "url(/img/pencil.svg)0 25,auto";
   var penchoosen =true;
   document.querySelector('#pen').addEventListener('click',()=>{
     if(penchoosen) return;  
     canvas.style.cursor = "url(/img/pencil.svg)0 20,auto";
+    color=prevcolor;
     ctx.strokeStyle = color;
       linewidth -= 10;
       penchoosen=true;
@@ -52,42 +54,75 @@ window.addEventListener("load", () => {
     if(!penchoosen) return;
     canvas.style.cursor = "url(./img/eraser.svg)0 15,auto";
     linewidth+=10;
-    color = document.querySelector("#bcolor").value;
+    prevcolor=color;
+    color = backgroundcolor;
     penchoosen=false;
   });
 
   var colormenu=document.querySelector('#color-menu');
   var setcolor = document.querySelector("#setcolor");
+  var toopen=0;
   setcolor.addEventListener("click", () => {
     colormenu.style.right = "0vh";
+    toopen=1
   });
   colormenu.addEventListener("click",(e)=>{
     var target = e.target;
-    switch (target.id) {
-      case "black":
-        color = "black";
-        break;
-      case "white":
-        color = "white";
-        break;
-      case "red":
-        color = "red";
-        break;
-      case "green":
-        color = "greenyellow";
-        break;
-      case "blue":
-        color = "blue";
-        break;
-      default:
-        break;
+    if(toopen==1){
+      switch (target.id) {
+        case "black":
+          color = "black";
+          break;
+        case "white":
+          color = "white";
+          break;
+        case "red":
+          color = "red";
+          break;
+        case "green":
+          color = "greenyellow";
+          break;
+        case "blue":
+          color = "blue";
+          break;
+        default:
+          break;
+      }
+      setcolor.style.backgroundColor=color;
+    }
+    else if(toopen==2){
+      switch (target.id) {
+        case "black":
+          backgroundcolor = "black";
+          break;
+        case "white":
+          backgroundcolor = "white";
+          break;
+        case "red":
+          backgroundcolor = "red";
+          break;
+        case "green":
+          backgroundcolor = "greenyellow";
+          break;
+        case "blue":
+          backgroundcolor = "blue";
+          break;
+        default:
+          break;
+      }
+      ctx.fillStyle =backgroundcolor;
+      reset();
+      if(!penchoosen) color=backgroundcolor;
+      setbackgroundcolor.style.backgroundColor = backgroundcolor;
     }
     colormenu.style.right="-30vh";
   })
-  document.querySelector("#bcolor").addEventListener("change", () => {
-    ctx.fillStyle = document.querySelector("#bcolor").value;
-    reset();
+  document.querySelector("#setbackgroundcolor").addEventListener("click", () => {
+    colormenu.style.right = "0vh";
+    toopen=2;
+    
   });
+
   document.querySelector("#delete").addEventListener("click", () => {
     reset();
   });
